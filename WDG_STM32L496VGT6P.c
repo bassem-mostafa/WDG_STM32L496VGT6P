@@ -37,7 +37,7 @@
 #endif
 
 #ifdef DEBUG
-// #undef DEBUG // FIXME Un-Comment to disable logging within this file
+    #undef DEBUG
 #endif
 
 // #############################################################################
@@ -639,7 +639,7 @@ WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_DeInitialize( WDG_STM32L496VGT6P_
 // #### Public Variable(s) #####################################################
 // #############################################################################
 
-const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260604-0241";
+const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260604-1845";
 
 // #############################################################################
 // #### File Guard #############################################################
