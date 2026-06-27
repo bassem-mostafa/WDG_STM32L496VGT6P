@@ -513,6 +513,8 @@ static WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_OperationCommitExecute( WD
 }
     #endif
 
+        __HAL_DBGMCU_FREEZE_IWDG( );
+
         Operation->Type = WDG_STM32L496VGT6P_OperationType_Commit;
         Operation->Handler = WDG_STM32L496VGT6P_OperationCommitResolve;
         Operation->Status = WDG_STM32L496VGT6P_Status_Success;
@@ -639,7 +641,7 @@ WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_DeInitialize( WDG_STM32L496VGT6P_
 // #### Public Variable(s) #####################################################
 // #############################################################################
 
-const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260604-1845";
+const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260627-1908";
 
 // #############################################################################
 // #### File Guard #############################################################
