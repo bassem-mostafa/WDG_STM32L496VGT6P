@@ -317,6 +317,7 @@ static WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_Instance_Cycle( WDG_STM32L
         WDG_STM32L496VGT6P_Operation_t * Operation = &Process->Context.Operation;
         WDG_STM32L496VGT6P_Event_t Event = Instance->Event; // CAUTION: Has to copy events occurred at the early start of the cycle, so as to be cleared at the end of the cycle,
                                                             //          which let events occurs after that for the next cycle call
+        Instance->Event &= ~Event;                          //          Clear captured events
 
         if ( Operation->Handler != NULL )
         {
@@ -338,9 +339,14 @@ static WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_Instance_Cycle( WDG_STM32L
 
         if ( ( Event & WDG_STM32L496VGT6P_Event_Interrupt ) == WDG_STM32L496VGT6P_Event_Interrupt )
         {
-            Instance->Event &= ~WDG_STM32L496VGT6P_Event_Interrupt;
+            Event &= ~WDG_STM32L496VGT6P_Event_Interrupt;
             WDG_Trace( "Interrupt: WDGx=%d", WDGx );
             // TODO Invoke Callback
+        }
+
+        if ( Event )
+        {
+            WDG_Warning( "Not handled events %X: WDGx=%d", Event, WDGx );
         }
 
         switch ( WDGx )
@@ -641,7 +647,7 @@ WDG_STM32L496VGT6P_Status_t WDG_STM32L496VGT6P_DeInitialize( WDG_STM32L496VGT6P_
 // #### Public Variable(s) #####################################################
 // #############################################################################
 
-const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260627-1908";
+const char WDG_STM32L496VGT6P_VERSION[] = "0.0.0.v20260818-0345";
 
 // #############################################################################
 // #### File Guard #############################################################
